@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ActivityAndFragment</string>
+    <string name="greeting">안녕하세요 진정모입니다.</string>
+</resources>
