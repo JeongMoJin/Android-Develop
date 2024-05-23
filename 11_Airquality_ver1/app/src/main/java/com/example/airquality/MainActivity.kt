@@ -1,4 +1,4 @@
-package kr.jeongmo.airquality
+package com.example.airquality
 
 import android.Manifest
 import android.app.Activity
@@ -17,10 +17,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.airquality.databinding.ActivityMainBinding
 import com.example.airquality.retrofit.AirQualityResponse
 import com.example.airquality.retrofit.AirQualityService
 import com.example.airquality.retrofit.RetrofitConnection
-import kr.jeongmo.airquality.databinding.ActivityMainBinding
 
 import retrofit2.Call
 import retrofit2.Callback
@@ -93,8 +93,7 @@ class MainActivity : AppCompatActivity() {
     private fun getAirQualityData(latitude: Double, longitude: Double) { // 레트로핏 객체를 이용하면 AirQualityService 인터페이스 구현체를 가져올 수 있습니다.
         val retrofitAPI = RetrofitConnection.getInstance().create(AirQualityService::class.java)
 
-        retrofitAPI.getAirQualityData(latitude.toString(), longitude.toString(), "\t\n" +
-                "3c844b3f-bd45-47ac-b37f-efda97e2718b")
+        retrofitAPI.getAirQualityData(latitude.toString(), longitude.toString(), "f8f5a711-7da9-4118-a875-304ffded8cb8")
             .enqueue(object : Callback<AirQualityResponse> {
                 override fun onResponse(
                     call: Call<AirQualityResponse>,
@@ -239,7 +238,7 @@ class MainActivity : AppCompatActivity() {
 
         //먼저 ActivityResultLauncher를 설정해줍니다. 이 런처를 이용하여 결과 값을 리턴해야하는 인텐트를 실행할 수 있습니다.
         getGPSPermissionLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result -> //결과 값을 받았을 때 로직을 작성해줍니다.
-            if (result.resultCode == RESULT_OK) { //사용자가 GPS 를 활성화 시켰는지 확인합니다.
+            if (result.resultCode == Activity.RESULT_OK) { //사용자가 GPS 를 활성화 시켰는지 확인합니다.
                 if (isLocationServicesAvailable()) {
                     isRunTimePermissionsGranted()
                 } else { //위치 서비스가 허용되지 않았다면 앱을 종료합니다.
@@ -265,24 +264,3 @@ class MainActivity : AppCompatActivity() {
         builder.create().show()
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
