@@ -1,5 +1,7 @@
 package com.example.myapplication
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -12,9 +14,11 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.maps.android.clustering.ClusterManager
 import kr.jeongmo.a0524__map_project.retrofit.LibraryResponse
 import kr.jeongmo.a0524__map_project.retrofit.LibraryService
 import kr.jeongmo.a0524__map_project.retrofit.RetrofitConnection
+import kr.jeongmo.a0524__map_project.retrofit.Row
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,6 +27,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
+    private lateinit var clusterManager: ClusterManager<Row>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,12 +53,24 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        // Add a marker in Sydney and move the camera
-//        val sydney = LatLng(-34.0, 151.0)
-//        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        // 클러스터 매니저 세팅
+        clusterManager = ClusterManager(this, mMap)
+        mMap.setOnCameraIdleListener(clusterManager) // 화면을 이동 후 멈췄을 때 설정
+        mMap.setOnMarkerClickListener(clusterManager) // 마커 클릭 설정
 
         loadLibrary()
+
+//        mMap.setOnMarkerClickListener {
+//            if (it.tag != null) {
+//                var url = it.tag as String
+//                if (!url.startsWith("http")) {
+//                    url = "http://${url}"
+//                }
+//                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+//                startActivity(intent)
+//            }
+//            true
+//        }
     }
 
     private fun loadLibrary() {
@@ -76,11 +93,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val latLngBounds = LatLngBounds.builder()
 
         for (lib in libraryResponse.SeoulPublicLibraryInfo.row) {
+            // 기존 마커 세팅코드는 삭제하고 클러스터 매니저에 데이터를 추가하는 코드만 넣어줌.
+            clusterManager.addItem(lib)
             val position = LatLng(lib.XCNTS.toDouble(), lib.YDNTS.toDouble())
-            val marker = MarkerOptions().position(position).title(lib.LBRRY_NAME)
-            mMap.addMarker(marker)
+//            val marker = MarkerOptions().position(position).title(lib.LBRRY_NAME)
+////            mMap.addMarker(marker)
+//            val obj = mMap.addMarker(marker)
+//            obj?.tag = lib.HMPG_URL
 
-            latLngBounds.include(marker.position)
+            latLngBounds.include(position)
         }
         val bounds = latLngBounds.build()
         val padding = 0
