@@ -67,15 +67,5 @@ class AddTodoActivity : AppCompatActivity() {
 
 
 
-
-
-
-
-
-
-
-
-
-
     }
 }

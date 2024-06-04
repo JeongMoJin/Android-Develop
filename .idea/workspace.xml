@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="11fbd79e-30f7-44ae-ac94-75b46c8c9205" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/0528__constrain_layout/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/0528__constrain_layout/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ViewBindingSample/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ViewBindingSample/.idea/gradle.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,9 +25,10 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
     <property name="cidr.known.project.marker" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/0529_Thread" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/TodoList" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="11fbd79e-30f7-44ae-ac94-75b46c8c9205" name="Default Changelist" comment="" />
