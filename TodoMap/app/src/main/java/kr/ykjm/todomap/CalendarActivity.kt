@@ -3,9 +3,9 @@ package kr.ykjm.todomap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class MainActivity : AppCompatActivity() {
+class CalendarActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.calendar_todo)
+        setContentView(R.layout.calendar)
     }
 }

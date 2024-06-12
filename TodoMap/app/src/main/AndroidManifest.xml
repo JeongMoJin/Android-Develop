@@ -10,7 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TodoMap">
         <activity
-            android:name=".MainActivity"
+            android:name=".CalendarTodoActivity"
+            android:exported="true" />
+        <activity
+            android:name=".CalendarActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
