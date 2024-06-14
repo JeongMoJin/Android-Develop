@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_back">
+
+    <!-- '돌아가기' 버튼 -->
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="돌아가기"
+        android:textColor="@color/color_txt"
+        android:backgroundTint="@color/color_back"
+        android:onClick="goBackToCalendar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 백그라운드 테두리를 갖는 뷰 -->
+    <TextView
+        android:id="@+id/txtBackground"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/border"
+        app:layout_constraintBottom_toBottomOf="@id/guideline3"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintTop_toTopOf="@id/guideline4" />
+
+    <!-- 'Date' 텍스트 -->
+    <TextView
+        android:id="@+id/txtDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="Date"
+        android:textColor="@color/color_tit"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/guidelineText"
+        app:layout_constraintTop_toTopOf="@id/txtBackground" />
+
+    <!-- 실제 날짜를 나타내는 텍스트 -->
+    <TextView
+        android:id="@+id/dateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:text="2024-06-14"
+        android:textColor="@color/color_txt"
+        android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/txtDate"
+        app:layout_constraintStart_toEndOf="@id/txtDate" />
+
+    <!-- 'Emotion' 텍스트 -->
+    <TextView
+        android:id="@+id/txtEmotion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Emotion"
+        android:textColor="@color/color_tit"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/guidelineText"
+        app:layout_constraintTop_toBottomOf="@id/txtDate" />
+
+    <!-- 오늘의 이모티콘을 나타내는 텍스트 -->
+    <TextView
+        android:id="@+id/emotionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:text="오늘의 이모티콘은?"
+        android:textColor="@color/color_txt"
+        android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/txtEmotion"
+        app:layout_constraintStart_toEndOf="@id/txtEmotion" />
+
+    <!-- 이모티콘 선택 버튼 -->
+    <Button
+        android:id="@+id/emoButton"
+        android:layout_width="55dp"
+        android:layout_height="35dp"
+        android:text="선택"
+        android:textSize="10sp"
+        android:backgroundTint="@color/color_back"
+        android:textColor="@color/color_txt"
+        app:layout_constraintBottom_toTopOf="@+id/guideline7"
+        app:layout_constraintEnd_toStartOf="@+id/guideline8" />
+
+    <!-- 'Todo List' 텍스트 -->
+    <TextView
+        android:id="@+id/txtTodoList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Todo List"
+        android:textColor="@color/color_tit"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/guidelineText"
+        app:layout_constraintTop_toBottomOf="@id/txtEmotion" />
+
+    <!-- 달력 아이콘을 갖는 날짜 선택 버튼 -->
+    <ImageButton
+        android:id="@+id/dateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:elevation="20dp"
+        android:src="@drawable/ic_baseline_calendar_today_24"
+        app:layout_constraintEnd_toEndOf="@id/guidelineButton"
+        app:layout_constraintTop_toTopOf="@id/dateTextView" />
+
+    <!-- 이모티콘 선택 버튼 -->
+<!--    <Button-->
+<!--        android:id="@+id/emoButton"-->
+<!--        android:layout_width="55dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@android:color/transparent"-->
+<!--        android:text="\ud83c\udf15"-->
+<!--        android:textSize="17sp"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/guideline7"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/guideline8" />-->
+
+    <!-- 완료하지 않은 Todo 항목 아이콘 -->
+    <ImageButton
+        android:id="@+id/btnNotCheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_outline_circle_24"
+        app:layout_constraintStart_toStartOf="@id/guidelineText"
+        app:layout_constraintTop_toBottomOf="@id/txtTodoList" />
+
+    <!-- 완료된 Todo 항목 아이콘 -->
+    <ImageButton
+        android:id="@+id/btnCheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_baseline_check_circle_24"
+        app:layout_constraintStart_toStartOf="@id/guidelineText"
+        app:layout_constraintTop_toBottomOf="@id/btnNotCheck" />
+
+    <!-- 완료하지 않은 Todo 항목 텍스트 -->
+    <TextView
+        android:id="@+id/todoNotClear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="3dp"
+        android:text="와이어프레임 작업"
+        android:textColor="@color/color_txt"
+        app:layout_constraintStart_toEndOf="@id/btnNotCheck"
+        app:layout_constraintTop_toTopOf="@id/btnNotCheck" />
+
+    <!-- 완료된 Todo 항목 텍스트 -->
+    <!-- 취소선은 액티비티에서 구현 -->
+    <TextView
+        android:id="@+id/todoClear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="3dp"
+        android:text="학원 강의 듣기"
+        android:textColor="@color/color_txt"
+        app:layout_constraintStart_toEndOf="@id/btnCheck"
+        app:layout_constraintTop_toTopOf="@id/btnCheck" />
+
+    <!-- Todo 리스트를 표시하는 리사이클러뷰 -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/todoList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/txtBackground"
+        app:layout_constraintEnd_toEndOf="@id/guidelineButton"
+        app:layout_constraintStart_toStartOf="@id/guidelineText"
+        app:layout_constraintTop_toBottomOf="@id/btnCheck" />
+
+    <!-- 좌측 가이드라인 -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.04" />
+
+    <!-- 텍스트 가이드라인 -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="31dp" />
+
+    <!-- 버튼 가이드라인 -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="45dp" />
+
+    <!-- 우측 가이드라인 -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="16dp" />
+
+    <!-- 상단 가이드라인 -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8358413" />
+
+    <!-- 하단 가이드라인 -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="70dp" />
+
+    <!-- 하단 바 -->
+    <TextView
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:text="하단 바"
+        android:textColor="@color/color_txt"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- 가운데 가이드라인 -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="173dp" />
+
+    <!-- 오른쪽 가이드라인 -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="383dp" />
+
+    <!-- 앱 타이틀 -->
+    <TextView
+        android:id="@+id/appTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:text="TodoMap"
+        android:textColor="@color/color_tit"
+        app:layout_constraintBottom_toTopOf="@id/bottomBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideline3" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

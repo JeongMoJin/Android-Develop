@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">0614CalendarTest</string>
+
+        <string-array name="emoji_array">
+            <item>😊</item>
+            <item>😄</item>
+            <item>😎</item>
+            <item>😍</item>
+            <item>🥰</item>
+        </string-array>
+
+
+</resources>

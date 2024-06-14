@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- 컬러 추가 -->
+    <color name="color_point">#7C7AE5</color> <!-- 보라색 -->
+    <color name="color_back">#F9F9F9</color> <!-- 배경색 -->
+    <color name="color_txt">#444444</color> <!-- 텍스트 색 -->
+    <color name="color_tit">#BBBBBB</color> <!-- 타이틀 색 -->
+</resources>
