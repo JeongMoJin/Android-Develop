@@ -20,22 +20,23 @@ class EmojiDecorator(
     private val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
     fun decorateCalendar() {
-        calendarView.removeDecorators() // 기존 데코레이터 제거
+        for (dateString in datesWithEmoji) {
+            val date = sdf.parse(dateString)
+            date?.let {
+                val calendarDay = CalendarDay.from(it)
+                val emoji = loadEmojiFromSharedPreferences(dateString)
+                if (emoji.isNotEmpty()) {
+                    calendarView.addDecorator(object : DayViewDecorator {
+                        override fun shouldDecorate(day: CalendarDay): Boolean {
+                            return day == calendarDay
+                        }
 
-        for (date in datesWithEmoji) {
-            val calendar = Calendar.getInstance()
-            calendar.time = sdf.parse(date) ?: continue
-            val calendarDay = CalendarDay.from(calendar)
-
-            calendarView.addDecorator(object : DayViewDecorator {
-                override fun shouldDecorate(day: CalendarDay?): Boolean {
-                    return day != null && day == calendarDay
+                        override fun decorate(view: DayViewFacade) {
+                            view.addSpan(DotSpan(5f, resources.getColor(R.color.purple_200, null)))
+                        }
+                    })
                 }
-
-                override fun decorate(view: DayViewFacade?) {
-                    view?.addSpan(DotSpan(5f, resources.getColor(R.color.teal_200)))
-                }
-            })
+            }
         }
     }
 

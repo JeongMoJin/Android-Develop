@@ -44,7 +44,7 @@ class TodoActivity : AppCompatActivity(), EmojiPickerDialogFragment.OnEmojiSelec
             val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             val todayDate = sdf.format(Date())
             dateTextView.text = todayDate
-            emotionButton.text = "이모티콘 선택"
+            emotionButton.text = ""
             emotionTextView.text = "오늘의 이모티콘은?"
 
             // 오늘 날짜에 저장된 이모티콘 불러오기
@@ -58,7 +58,7 @@ class TodoActivity : AppCompatActivity(), EmojiPickerDialogFragment.OnEmojiSelec
     }
 
     private fun updateSelectedEmoji(selectedEmoji: String) {
-        emotionButton.text = "선택"
+        emotionButton.text = selectedEmoji
         emotionTextView.text = "오늘의 이모티콘: $selectedEmoji"
     }
 
@@ -100,6 +100,4 @@ class TodoActivity : AppCompatActivity(), EmojiPickerDialogFragment.OnEmojiSelec
             saveEmojiToSharedPreferences(todayDate, emoji)
         }
     }
-
-
 }
