@@ -175,18 +175,17 @@
         app:layout_constraintGuide_begin="70dp" />
 
     <!-- 하단 바 -->
-    <TextView
-        android:id="@+id/bottomBar"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_Navigation"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="@color/white"
-        android:gravity="center"
-        android:text="하단 바"
-        android:textColor="@color/color_txt"
-        android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:itemBackground="@color/white"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_menu"
+        app:itemIconTint="@drawable/menu_selector_color"
+        app:itemTextColor="@drawable/menu_selector_color"/>
+
 
     <!-- 가운데 가이드라인 -->
     <androidx.constraintlayout.widget.Guideline
@@ -213,7 +212,7 @@
         android:gravity="center"
         android:text="TodoMap"
         android:textColor="@color/color_tit"
-        app:layout_constraintBottom_toTopOf="@id/bottomBar"
+        app:layout_constraintBottom_toTopOf="@id/bottom_Navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/guideline3" />

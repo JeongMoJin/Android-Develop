@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <solid android:color="@color/white"/>
+    <corners android:topLeftRadius="16dp" android:bottomLeftRadius="16dp"/>
+</shape>
+
+<!-- 지도에서 검색할 주소를 입력할 필드의 모양, 배경 색을 구성 -->

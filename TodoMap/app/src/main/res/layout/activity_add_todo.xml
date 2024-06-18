@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="20dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="할 일 추가"
+                    android:textSize="20dp"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <ImageButton
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/icon_close"
+                    android:background="@color/white"
+                    android:layout_gravity="right"
+                    android:id="@+id/btn_close"/>
+
+            </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:layout_width="260dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:id="@+id/add_text"
+                        android:background="@drawable/edit_radius"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="15dp"
+                        android:hint="할 일을 입력하세요"
+                        android:paddingLeft="10dp">
+
+                        <requestFocus/>
+
+                    </EditText>
+
+                    <Button
+                        android:layout_width="65dp"
+                        android:layout_height="40dp"
+                        android:id="@+id/add_todo"
+                        android:background="@drawable/button_radius"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="13dp"
+                        android:layout_marginRight="10dp"
+                        android:text="추가"
+                        android:textColor="@color/white" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="5dp">
+
+                    <Spinner
+                        android:layout_width="120dp"
+                        android:layout_height="40dp"
+                        android:id="@+id/add_cate"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="10dp"/>
+
+                    <ImageButton
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:id="@+id/add_cal"
+                        android:src="@drawable/ic_bottom_cal"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@color/white" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

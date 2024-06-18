@@ -11,9 +11,6 @@
         android:theme="@style/Theme.0614CalendarTest">
         <activity
             android:name=".TodoActivity"
-            android:exported="true" />
-        <activity
-            android:name=".CalendarActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

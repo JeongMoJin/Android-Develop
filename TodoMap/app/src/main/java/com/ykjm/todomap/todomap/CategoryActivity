@@ -1,0 +1,112 @@
+package com.ykjm.todomap.todomap;
+import android.app.Activity
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.os.Bundle
+import android.view.ViewGroup
+import android.widget.Button
+import android.widget.PopupMenu
+import androidx.appcompat.app.AppCompatActivity
+import com.ykjm.todomap.todomap.databinding.ActivityCategoryBinding
+
+class CategoryActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityCategoryBinding
+    private var selectedButtonId: Int = 0
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityCategoryBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+
+        // 모든 버튼을 순회하며 ID에 'category'가 포함된 버튼에 롱 클릭 리스너 추가
+        addLongClickListenerToCategoryButtons(binding.root as ViewGroup)
+    }
+
+    private fun addLongClickListenerToCategoryButtons(viewGroup: ViewGroup) {
+        for (i in 0 until viewGroup.childCount) {
+            val childView = viewGroup.getChildAt(i)
+            if (childView is ViewGroup) {
+                // 재귀적으로 자식 뷰 그룹을 탐색
+                addLongClickListenerToCategoryButtons(childView)
+            } else if (childView is Button && resources.getResourceEntryName(childView.id).contains("category")) {
+                childView.setOnLongClickListener {
+                    showPopupMenu(childView)
+                    true
+                }
+            }
+        }
+    }
+
+    private fun showPopupMenu(button: Button) {
+        // 전달받은 버튼을 기준으로 팝업 메뉴 생성
+        val popupMenu = PopupMenu(this, button)
+        // 팝업 메뉴에 카테고리 버튼 메뉴를 인플레이트
+        popupMenu.menuInflater.inflate(R.menu.category_button_menu, popupMenu.menu)
+
+        // 팝업 메뉴 아이템 클릭 리스너 설정
+        popupMenu.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.delete -> {
+                    // 삭제 메뉴 클릭 시 버튼 삭제 코드 호출
+                    (button.parent as ViewGroup).removeView(button)
+                    true
+                }
+                R.id.modify -> {
+                    // 수정 메뉴 클릭 시 CategoryModifyActivity로 이동
+                    val intent = Intent(this, CategoryModifyActivity::class.java)
+
+                    // 버튼 ID와 텍스트 색상 전달
+                    intent.putExtra("buttonId", button.id)
+                    intent.putExtra("textColor", button.currentTextColor)
+
+                    // 버튼의 배경색을 가져와서 전달
+                    val backgroundColor = (button.background as? ColorDrawable)?.color ?: 0xFFFFFFFF.toInt()
+                    intent.putExtra("backgroundColor", backgroundColor)
+
+                    // 버튼 텍스트를 전달
+                    intent.putExtra("categoryTitle", button.text.toString())
+
+                    // 수정하려는 버튼의 ID를 저장
+                    selectedButtonId = button.id
+
+                    // 수정 액티비티를 시작하고 결과를 기다림
+                    startActivityForResult(intent, REQUEST_CODE_MODIFY_CATEGORY)
+                    true
+                }
+                else -> false
+            }
+        }
+        // 팝업 메뉴를 화면에 표시
+        popupMenu.show()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_MODIFY_CATEGORY && resultCode == Activity.RESULT_OK) {
+            data?.let {
+                // 수정된 데이터 가져오기
+                val newTitle = it.getStringExtra("categoryTitle") ?: ""
+                val newTextColor = it.getIntExtra("textColor", Color.BLACK)
+                val newBackgroundColor = it.getIntExtra("backgroundColor", Color.WHITE)
+                val buttonId = it.getIntExtra("buttonId", -1)
+
+                if (buttonId != -1) {
+                    // 수정된 데이터를 해당 버튼에 적용
+                    val button = findViewById<Button>(buttonId)
+                    button.text = newTitle
+                    button.setTextColor(newTextColor)
+                    button.setBackgroundColor(newBackgroundColor)
+
+                    // category_button.xml drawable 적용
+                    button.setBackgroundResource(R.drawable.category_button)
+                }
+            }
+        }
+    }
+
+    companion object {
+        const val REQUEST_CODE_MODIFY_CATEGORY = 1
+    }
+}

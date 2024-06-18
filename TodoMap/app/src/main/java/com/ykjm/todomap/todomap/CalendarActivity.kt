@@ -1,40 +1,29 @@
-package kr.ykjm.a0614calendartest
+package com.ykjm.todomap.todomap
 
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener
 import com.prolificinteractive.materialcalendarview.CalendarDay
+import com.ykjm.todomap.todomap.R
 import java.text.SimpleDateFormat
 import java.util.*
 
-class CalendarFragment : Fragment(), EmojiPickerDialogFragment.OnEmojiSelectedListener {
+class CalendarActivity : AppCompatActivity(), EmojiPickerDialogFragment.OnEmojiSelectedListener {
 
     private lateinit var calendarView: MaterialCalendarView
     private lateinit var sharedPreferences: SharedPreferences
     private val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.calendar, container, false)
-    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.calendar)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        calendarView = view.findViewById(R.id.mcCalendarView)
-        sharedPreferences = requireActivity().getSharedPreferences("emoji_prefs", Context.MODE_PRIVATE)
+        calendarView = findViewById(R.id.mcCalendarView)
+        sharedPreferences = getSharedPreferences("emoji_prefs", MODE_PRIVATE)
 
         // EmojiDecorator를 생성하고 캘린더에 데코레이터 추가
         val emojiDecorator = EmojiDecorator(getDatesWithEmoji(), calendarView, resources, sharedPreferences)
@@ -53,6 +42,7 @@ class CalendarFragment : Fragment(), EmojiPickerDialogFragment.OnEmojiSelectedLi
             }
         })
 
+
         // 초기화면으로 오늘 날짜에 저장된 이모티콘 표시
         val today = CalendarDay.today().date
         val todayDate = sdf.format(today)
@@ -61,7 +51,7 @@ class CalendarFragment : Fragment(), EmojiPickerDialogFragment.OnEmojiSelectedLi
     }
 
     private fun updateSelectedEmojiOnCalendar(selectedEmoji: String) {
-        view?.findViewById<TextView>(R.id.dateTextView)?.text = selectedEmoji
+        findViewById<TextView>(R.id.dateTextView)?.text = selectedEmoji
     }
 
     private fun loadEmojiFromSharedPreferences(selectedDate: String): String {
@@ -69,14 +59,14 @@ class CalendarFragment : Fragment(), EmojiPickerDialogFragment.OnEmojiSelectedLi
     }
 
     private fun navigateToSecondPage(selectedDate: String) {
-        val intent = Intent(activity, TodoActivity::class.java)
+        val intent = Intent(this, TodoActivity::class.java)
         intent.putExtra("SELECTED_DATE", selectedDate)
         startActivityForResult(intent, REQUEST_EMOJI_SELECTION)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_EMOJI_SELECTION && resultCode == AppCompatActivity.RESULT_OK) {
+        if (requestCode == REQUEST_EMOJI_SELECTION && resultCode == RESULT_OK) {
             val selectedEmoji = data?.getStringExtra("SELECTED_EMOJI")
             val selectedDate = data?.getStringExtra("SELECTED_DATE")
 
@@ -99,6 +89,10 @@ class CalendarFragment : Fragment(), EmojiPickerDialogFragment.OnEmojiSelectedLi
         editor.apply()
     }
 
+    companion object {
+        const val REQUEST_EMOJI_SELECTION = 101
+    }
+
     private fun getDatesWithEmoji(): List<String> {
         val datesWithEmoji = mutableListOf<String>()
         val keys = sharedPreferences.all.keys
@@ -114,9 +108,5 @@ class CalendarFragment : Fragment(), EmojiPickerDialogFragment.OnEmojiSelectedLi
         }
 
         return datesWithEmoji
-    }
-
-    companion object {
-        const val REQUEST_EMOJI_SELECTION = 101
     }
 }

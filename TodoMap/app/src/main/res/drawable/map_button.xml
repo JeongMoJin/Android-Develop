@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <corners
+                android:topLeftRadius="0dp" 
+                android:bottomLeftRadius="0dp"
+                android:topRightRadius="10dp"    
+                android:bottomRightRadius="10dp"/>
+        </shape>
+    </item>
+</selector>
+<!-- 맵 검색 버튼 모양 설정 오른쪽 모서리 부분은 직각으로, 왼쪽은 10dp 만큼 둥글게 변경 -->
